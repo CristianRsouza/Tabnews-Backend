@@ -27,7 +27,21 @@ public class UserController {
   
   @PostMapping
   public ResponseEntity<Object> register(@RequestBody UserModel newUser) {
-    UserModel savedUser = userRepository.save(newUser);
-    return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+      UserModel existingEmail = userRepository.findByEmail(newUser.getEmail());  
+      UserModel existingName = userRepository.findByUsername(newUser.getUsername());
+
+      if (existingEmail != null) {
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email já cadastrado");
+      }
+      if (existingName != null) {
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome ja esta sendo ultilizado");
+      }
+
+      newUser.setTabcash(0);
+      newUser.setTabcoins(0);
+      UserModel savedUser = userRepository.save(newUser);
+  
+      return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
   }
+  
 }

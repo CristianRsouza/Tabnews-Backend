@@ -1,5 +1,5 @@
 package com.tabnews.tabnews.repositories;
 
-public class PostRepostory {
-  
+public class Optional<T> {
+
 }

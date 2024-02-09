@@ -1,5 +1,7 @@
 package com.tabnews.tabnews.models;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,9 +14,8 @@ public class PostModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer parentid;
+    private Integer parent_id;
+    private Integer writer_id;
     private String text;
-    private Integer writer;
-    private Integer tabcoins;
-    
+    private Date date;
 }

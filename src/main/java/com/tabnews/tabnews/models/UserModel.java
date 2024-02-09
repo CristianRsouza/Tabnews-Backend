@@ -15,12 +15,9 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
-
-    private List<FeaturesModel> features;
-
     private String bio;
     private Integer tabcoins;
     private Integer tabcash;
-
-    private List<PostModel> userposts;
+    private String email;
+    private String senha;
 }
