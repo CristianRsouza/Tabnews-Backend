@@ -2,7 +2,6 @@ package com.tabnews.tabnews.models;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Optional;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +13,7 @@ import lombok.Data;
 @Data
 public class PostModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer parent_id;
     private Integer writer_id;

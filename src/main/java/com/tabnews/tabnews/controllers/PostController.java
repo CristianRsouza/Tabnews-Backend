@@ -37,17 +37,25 @@ public class PostController {
   @PostMapping
   public ResponseEntity<Object> register(@RequestBody PostModel newPost) {
         
-      postRepository.save(newPost);
-  
+
+
+
       Optional<UserModel> optionalUser = userRepository.findById(newPost.getWriter_id());
       if(optionalUser.isPresent()) {
           UserModel user = optionalUser.get();
-          newPost.setWriter_id(user.getId());
-          newPost.setDate(calendar.getTime());
 
-            if(newPost.getText().equals(null)) {
-                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Escreva um texto para postar");
-            } 
+          if(user.getFeatures().getCreate_content().equals(true)) {
+            
+            postRepository.save(newPost);
+  
+            newPost.setWriter_id(user.getId());
+            newPost.setDate(calendar.getTime());
+                  if(newPost.getText().equals(null)) {
+                 
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Escreva um texto para postar");
+                  } 
+          }
+
       } else {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario nao existe");
 

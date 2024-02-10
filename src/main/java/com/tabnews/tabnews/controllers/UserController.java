@@ -1,6 +1,8 @@
 package com.tabnews.tabnews.controllers;
 
 import java.util.List;
+
+import com.tabnews.tabnews.models.Features;
 import com.tabnews.tabnews.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ public class UserController {
   
   @GetMapping
   public List<UserModel> getUsers() {
+  
     return userRepository.findAll();
   }
   
@@ -37,6 +40,14 @@ public class UserController {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome ja esta sendo ultilizado");
       }
 
+      Features features = new Features();
+      features.setCreate_content(true);
+      features.setCreate_session(true);
+      features.setDelete_content(true);
+      features.setEdit_content(true);
+      features.setEdit_user(true);
+
+      newUser.setFeatures(features);
       newUser.setTabcash(0);
       newUser.setTabcoins(0);
       UserModel savedUser = userRepository.save(newUser);
