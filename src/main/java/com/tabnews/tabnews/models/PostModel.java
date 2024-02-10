@@ -1,6 +1,8 @@
 package com.tabnews.tabnews.models;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,5 +19,17 @@ public class PostModel {
     private Integer parent_id;
     private Integer writer_id;
     private String text;
-    private Date date;
+    private Calendar date;
+
+    public void setWriter_id(Integer writer_id) {
+        this.writer_id = writer_id;
+    }
+
+    public void setDate(Date time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(time);
+        this.date = calendar;
+    }
 }
+
+
